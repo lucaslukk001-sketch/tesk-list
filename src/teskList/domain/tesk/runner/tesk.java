@@ -9,12 +9,22 @@ public class tesk {
     private String tarefa;
     private LocalDateTime data;
     private int prioriade;
+    private int ID;
 
-    public tesk(String titulo, int prioriade, LocalDateTime data, String tarefa) {
+    public tesk(String titulo, int prioriade, LocalDateTime data, String tarefa, int ID) {
         Titulo = titulo;
         this.prioriade = prioriade;
         this.data = data;
         this.tarefa = tarefa;
+        this.ID = ID;
+    }
+
+    public int getID() {
+        return ID;
+    }
+
+    public void setID(int ID) {
+        this.ID = ID;
     }
 
     public String getTitulo() {
