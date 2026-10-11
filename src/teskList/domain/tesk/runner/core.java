@@ -10,10 +10,25 @@ import java.util.Scanner;
 
 public class core {
 
-    private Map<Integer, tesk> iDteskMap = new HashMap<>();
+    private Map<Integer, tesk> teskMap = new HashMap<>();
     private int ID = 1;
+    private Scanner scanner = new Scanner(System.in);
 
-    public void createTesk(String tile, String tesk, LocalDateTime date, int priority) {
+    public void createTesk(String tile, String tesk, LocalDateTime date, priority priority) {
+        if (tile == null || tesk == null) {
+            System.out.println("titulo or tarefa invalid");
+        }
+        if (date == null) {
+            System.out.println("data invalida");
+        }
+        if (priority == null) {
+            System.out.println("prioridade invalida");
+        }
+
+        ID++;
+
+        tesk terefa = new tesk(tile, priority, date, tesk, ID);
+        teskMap.put(ID, terefa);
 
 
     }
@@ -29,8 +44,58 @@ public class core {
 
         } catch (NumberFormatException e) {
             System.out.println("Entrada inválida! Digite apenas números inteiros.");
-            return 0;
+            return -1;
         }
+    }
+
+    public static LocalDateTime lerDataHora() {
+        // O Scanner é criado diretamente aqui dentro
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.println("\n--- Cadastro de Data e Hora ---");
+
+        int dia, mes, ano, hora, minuto;
+
+        // 1. Passo a passo para o Dia, Mês e Ano
+        while (true) {
+            System.out.println("Digite o dia(ex: 10):");
+            dia = lerInt(scanner.nextLine());
+            System.out.println("Digite o mes(ex: 12):");
+            mes = lerInt(scanner.nextLine());
+            System.out.println("Digite o ano(ex: 2026):");
+            ano = lerInt(scanner.nextLine());
+
+            try {
+                // Valida se a data realmente existe no calendário
+                LocalDate.of(ano, mes, dia);
+                break; // Data válida! Sai do loop.
+            } catch (Exception e) {
+                System.out.println("❌ Data inválida! Esse dia não existe neste mês/ano. Tente novamente.\n");
+            }
+        }
+
+        // 2. Validação da Hora (0 a 23)
+        while (true) {
+            System.out.println("Digite o hora(0 a 23):");
+            hora = lerInt(scanner.nextLine());
+            if (hora >= 0 && hora <= 23) {
+                break;
+            }
+            System.out.println("❌ Hora inválida! Digite um valor entre 0 e 23.");
+        }
+
+        // 3. Validação dos Minutos (0 a 59)
+        while (true) {
+            System.out.println("Digite o minuto(0 a 59):");
+            minuto = lerInt(scanner.nextLine());
+            if (minuto >= 0 && minuto <= 59) {
+                break;
+            }
+            System.out.println("❌ Minuto inválido! Digite um valor entre 0 e 59.");
+        }
+
+        // Retorna o LocalDateTime pronto
+        return LocalDateTime.of(ano, mes, dia, hora, minuto);
     }
 
 

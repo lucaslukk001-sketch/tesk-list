@@ -1,17 +1,15 @@
 package teskList.domain.tesk.runner;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 
 public class tesk {
     private String Titulo;
     private String tarefa;
     private LocalDateTime data;
-    private int prioriade;
+    private priority prioriade;
     private int ID;
 
-    public tesk(String titulo, int prioriade, LocalDateTime data, String tarefa, int ID) {
+    public tesk(String titulo, priority prioriade, LocalDateTime data, String tarefa, int ID) {
         Titulo = titulo;
         this.prioriade = prioriade;
         this.data = data;
@@ -51,11 +49,11 @@ public class tesk {
         this.data = data;
     }
 
-    public int getPrioriade() {
+    public priority getPrioriade() {
         return prioriade;
     }
 
-    public void setPrioriade(int prioriade) {
+    public void setPrioriade(priority prioriade) {
         this.prioriade = prioriade;
     }
 }
