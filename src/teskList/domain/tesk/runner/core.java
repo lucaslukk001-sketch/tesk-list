@@ -49,14 +49,14 @@ public class core {
     }
 
     public static LocalDateTime lerDataHora() {
-        // O Scanner é criado diretamente aqui dentro
+
         Scanner scanner = new Scanner(System.in);
 
         System.out.println("\n--- Cadastro de Data e Hora ---");
 
         int dia, mes, ano, hora, minuto;
 
-        // 1. Passo a passo para o Dia, Mês e Ano
+
         while (true) {
             System.out.println("Digite o dia(ex: 10):");
             dia = lerInt(scanner.nextLine());
@@ -66,15 +66,15 @@ public class core {
             ano = lerInt(scanner.nextLine());
 
             try {
-                // Valida se a data realmente existe no calendário
+
                 LocalDate.of(ano, mes, dia);
-                break; // Data válida! Sai do loop.
+                break;
             } catch (Exception e) {
                 System.out.println("❌ Data inválida! Esse dia não existe neste mês/ano. Tente novamente.\n");
             }
         }
 
-        // 2. Validação da Hora (0 a 23)
+
         while (true) {
             System.out.println("Digite o hora(0 a 23):");
             hora = lerInt(scanner.nextLine());
@@ -84,7 +84,7 @@ public class core {
             System.out.println("❌ Hora inválida! Digite um valor entre 0 e 23.");
         }
 
-        // 3. Validação dos Minutos (0 a 59)
+
         while (true) {
             System.out.println("Digite o minuto(0 a 59):");
             minuto = lerInt(scanner.nextLine());
@@ -94,7 +94,7 @@ public class core {
             System.out.println("❌ Minuto inválido! Digite um valor entre 0 e 59.");
         }
 
-        // Retorna o LocalDateTime pronto
+
         return LocalDateTime.of(ano, mes, dia, hora, minuto);
     }
 
