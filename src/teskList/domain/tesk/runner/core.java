@@ -17,12 +17,15 @@ public class core {
     public void createTesk(String tile, String tesk, LocalDateTime date, priority priority) {
         if (tile == null || tesk == null) {
             System.out.println("titulo or tarefa invalid");
+            return;
         }
         if (date == null) {
             System.out.println("data invalida");
+            return;
         }
         if (priority == null) {
             System.out.println("prioridade invalida");
+            return;
         }
 
         ID++;
@@ -97,6 +100,10 @@ public class core {
 
         return LocalDateTime.of(ano, mes, dia, hora, minuto);
     }
+
+
+
+
 
 
 }
