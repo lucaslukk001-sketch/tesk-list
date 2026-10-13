@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Scanner;
 
@@ -37,25 +38,35 @@ public class core {
     }
 
     public static int lerInt(String entrada) {
+        Scanner scanner = new Scanner(System.in);
 
-        if (entrada.isBlank()) {
-            System.out.println("Você não digitou nada. Tente novamente!");
+        String Entrada = entrada;
+
+        while (true) {
+
+            if (Entrada.trim().isBlank()) {
+                System.out.println("Você não digitou nada. Tente novamente!");
+                continue;
+            }
+
+
+            try {
+                return Integer.parseInt(Entrada);
+
+
+            } catch (NumberFormatException e) {
+                System.out.println("Entrada inválida! Digite apenas números inteiros tente novamente.");
+
+
+            }
         }
 
-        try {
-            return Integer.parseInt(entrada);
-
-        } catch (NumberFormatException e) {
-            System.out.println("Entrada inválida! Digite apenas números inteiros.");
-            return -1;
-        }
     }
 
     public static LocalDateTime lerDataHora() {
 
         Scanner scanner = new Scanner(System.in);
 
-        System.out.println("\n--- Cadastro de Data e Hora ---");
 
         int dia, mes, ano, hora, minuto;
 
@@ -99,6 +110,28 @@ public class core {
 
 
         return LocalDateTime.of(ano, mes, dia, hora, minuto);
+    }
+
+
+    public static void gerenciar(){
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("CRIANDO TAREFA");
+        System.out.println("-".repeat(10));
+
+        System.out.println("digite o titulo da tarefa:");
+        String titulo = scanner.nextLine();
+
+
+        System.out.println("digite a tarefa:");
+        String tarefa = scanner.nextLine();
+
+        System.out.println("Qual o nivel de prioridade da tarefa (1-Baixo, 2-Medio, 3-Alto):");
+        priority prioridade = priority.deValor(lerInt(scanner.nextLine()));
+
+        System.out.println("Qual a data da tarefa:");
+        LocalDateTime data = lerDataHora();
+
+
     }
 
 

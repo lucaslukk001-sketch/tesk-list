@@ -16,6 +16,8 @@ public class tesk {
         this.tarefa = tarefa;
         this.ID = ID;
     }
+    public tesk(){}
+
 
     public int getID() {
         return ID;
@@ -56,4 +58,5 @@ public class tesk {
     public void setPrioriade(priority prioriade) {
         this.prioriade = prioriade;
     }
+
 }
