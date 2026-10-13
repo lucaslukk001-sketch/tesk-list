@@ -33,6 +33,7 @@ public class core {
 
         tesk terefa = new tesk(tile, priority, date, tesk, ID);
         teskMap.put(ID, terefa);
+        System.out.println("tarefa criada com sucesso!!!");
 
 
     }
@@ -114,13 +115,13 @@ public class core {
 
 
     public static void gerenciar(){
+
         Scanner scanner = new Scanner(System.in);
         System.out.println("CRIANDO TAREFA");
         System.out.println("-".repeat(10));
 
         System.out.println("digite o titulo da tarefa:");
         String titulo = scanner.nextLine();
-
 
         System.out.println("digite a tarefa:");
         String tarefa = scanner.nextLine();
@@ -130,6 +131,9 @@ public class core {
 
         System.out.println("Qual a data da tarefa:");
         LocalDateTime data = lerDataHora();
+        core core = new core();
+
+        core.createTesk(titulo, tarefa, data, prioridade);
 
 
     }
