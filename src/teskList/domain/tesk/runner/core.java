@@ -16,8 +16,8 @@ public class core {
     private Scanner scanner = new Scanner(System.in);
 
     public void createTesk(String tile, String tesk, LocalDateTime date, priority priority) {
-        if (tile == null || tesk == null) {
-            System.out.println("titulo or tarefa invalid");
+        if (tile.trim().toLowerCase().isBlank() || tesk.trim().toLowerCase().isBlank()) {
+            System.out.println("titulo or tarefa invalida");
             return;
         }
         if (date == null) {
@@ -38,17 +38,17 @@ public class core {
 
     }
 
-    public static int lerInt(String entrada) {
+    public static int lerInt() {
         Scanner scanner = new Scanner(System.in);
-
-        String Entrada = entrada;
-
         while (true) {
 
+            System.out.println("Digite:"); String Entrada = scanner.nextLine();
+
             if (Entrada.trim().isBlank()) {
-                System.out.println("Você não digitou nada. Tente novamente!");
+                System.out.println("Você não digitou nada, tente novamente:");
                 continue;
             }
+
 
 
             try {
@@ -56,7 +56,8 @@ public class core {
 
 
             } catch (NumberFormatException e) {
-                System.out.println("Entrada inválida! Digite apenas números inteiros tente novamente.");
+                System.out.println("Entrada inválida! Digite apenas números inteiros tente novamente:");
+                continue;
 
 
             }
@@ -74,11 +75,11 @@ public class core {
 
         while (true) {
             System.out.println("Digite o dia(ex: 10):");
-            dia = lerInt(scanner.nextLine());
+            dia = lerInt();
             System.out.println("Digite o mes(ex: 12):");
-            mes = lerInt(scanner.nextLine());
+            mes = lerInt();
             System.out.println("Digite o ano(ex: 2026):");
-            ano = lerInt(scanner.nextLine());
+            ano = lerInt();
 
             try {
 
@@ -92,7 +93,7 @@ public class core {
 
         while (true) {
             System.out.println("Digite o hora(0 a 23):");
-            hora = lerInt(scanner.nextLine());
+            hora = lerInt();
             if (hora >= 0 && hora <= 23) {
                 break;
             }
@@ -102,7 +103,7 @@ public class core {
 
         while (true) {
             System.out.println("Digite o minuto(0 a 59):");
-            minuto = lerInt(scanner.nextLine());
+            minuto = lerInt();
             if (minuto >= 0 && minuto <= 59) {
                 break;
             }
@@ -126,8 +127,8 @@ public class core {
         System.out.println("digite a tarefa:");
         String tarefa = scanner.nextLine();
 
-        System.out.println("Qual o nivel de prioridade da tarefa (1-Baixo, 2-Medio, 3-Alto):");
-        priority prioridade = priority.deValor(lerInt(scanner.nextLine()));
+        System.out.println("Qual o nivel de prioridade da tarefa (1-Baixo, 2-Medio, 3-Alto padrão-1):");
+        priority prioridade = priority.deValor(lerInt());
 
         System.out.println("Qual a data da tarefa:");
         LocalDateTime data = lerDataHora();
