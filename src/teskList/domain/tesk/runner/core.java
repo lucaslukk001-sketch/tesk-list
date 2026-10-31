@@ -7,13 +7,15 @@ import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class core {
 
-    private Map<Integer, tesk> teskMap = new HashMap<>();
-    private int ID = 1;
-    private Scanner scanner = new Scanner(System.in);
+    public Map<Integer, tesk> teskMap = new HashMap<>();
+    public int ID = 1;
+
 
     public void createTesk(String tile, String tesk, LocalDateTime date, priority priority) {
         if (tile.trim().toLowerCase().isBlank() || tesk.trim().toLowerCase().isBlank()) {
@@ -28,6 +30,7 @@ public class core {
             System.out.println("prioridade invalida");
             return;
         }
+        teskMap.get(1);
 
         ID++;
 
@@ -42,7 +45,7 @@ public class core {
         Scanner scanner = new Scanner(System.in);
         while (true) {
 
-            System.out.println("Digite:"); String Entrada = scanner.nextLine();
+            String Entrada = scanner.nextLine();
 
             if (Entrada.trim().isBlank()) {
                 System.out.println("Você não digitou nada, tente novamente:");
@@ -72,50 +75,67 @@ public class core {
 
         int dia, mes, ano, hora, minuto;
 
+        LocalDateTime agora = LocalDateTime.now();
 
-        while (true) {
-            System.out.println("Digite o dia(ex: 10):");
-            dia = lerInt();
-            System.out.println("Digite o mes(ex: 12):");
-            mes = lerInt();
-            System.out.println("Digite o ano(ex: 2026):");
-            ano = lerInt();
 
-            try {
 
-                LocalDate.of(ano, mes, dia);
-                break;
-            } catch (Exception e) {
-                System.out.println("❌ Data inválida! Esse dia não existe neste mês/ano. Tente novamente.\n");
+        while(true) {
+
+
+            while (true) {
+                System.out.println("Digite o dia(ex: 10):");
+                dia = lerInt();
+                System.out.println("Digite o mes(ex: 12):");
+                mes = lerInt();
+                System.out.println("Digite o ano(ex: 2026):");
+                ano = lerInt();
+
+                try {
+
+                    LocalDate.of(ano, mes, dia);
+                    break;
+                } catch (Exception e) {
+                    System.out.println("❌ Data inválida! Esse dia não existe neste mês/ano. Tente novamente.\n");
+                }
             }
-        }
 
 
-        while (true) {
-            System.out.println("Digite o hora(0 a 23):");
-            hora = lerInt();
-            if (hora >= 0 && hora <= 23) {
-                break;
+            while (true) {
+                System.out.println("Digite o hora(0 a 23):");
+                hora = lerInt();
+                if (hora >= 0 && hora <= 23) {
+                    break;
+                }
+                System.out.println("❌ Hora inválida! Digite um valor entre 0 e 23.");
             }
-            System.out.println("❌ Hora inválida! Digite um valor entre 0 e 23.");
-        }
 
 
-        while (true) {
-            System.out.println("Digite o minuto(0 a 59):");
-            minuto = lerInt();
-            if (minuto >= 0 && minuto <= 59) {
-                break;
+            while (true) {
+                System.out.println("Digite o minuto(0 a 59):");
+                minuto = lerInt();
+                if (minuto >= 0 && minuto <= 59) {
+                    break;
+                }
+                System.out.println("❌ Minuto inválido! Digite um valor entre 0 e 59.");
             }
-            System.out.println("❌ Minuto inválido! Digite um valor entre 0 e 59.");
+
+            LocalDateTime datadataDigitada = LocalDateTime.of(ano, mes, dia, hora, minuto);
+
+            if(datadataDigitada.isBefore(agora)){
+                System.out.println("Esta data esta no passado! Tente novamente");
+                continue;
+            }
+            return LocalDateTime.of(ano, mes, dia, hora, minuto);
+
+
+
         }
-
-
-        return LocalDateTime.of(ano, mes, dia, hora, minuto);
     }
 
 
     public static void gerenciar(){
+
+
 
         Scanner scanner = new Scanner(System.in);
         System.out.println("CRIANDO TAREFA");
@@ -135,11 +155,28 @@ public class core {
         core core = new core();
 
         core.createTesk(titulo, tarefa, data, prioridade);
+        core.print();
 
 
     }
 
+    public void print(){
 
+        for(tesk terefa : teskMap.values()){
+
+            System.out.println("Titulo :"+terefa.getTitulo());
+            System.out.println("Tarefa :"+terefa.getTarefa());
+            System.out.println("Prioridade :"+terefa.getPrioriade());
+            System.out.println("Data :"+terefa.getData());
+        }
+
+
+    }
+    public static void seetesk(){
+        core core = new core();
+
+        core.print();
+    }
 
 
 
