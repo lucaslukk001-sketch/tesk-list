@@ -9,6 +9,8 @@ import java.util.Map;
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 
 public class core {
@@ -176,6 +178,38 @@ public class core {
         core core = new core();
 
         core.print();
+    }
+
+    public void searchTesk(){
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("----BUSCA----");
+        System.out.println();
+        System.out.println("digite a tarefa por titulo que vc quer buscar:");
+        String busca = scanner.nextLine();
+        boolean encontrado = false;
+
+        for(tesk tarefa : teskMap.values() ) {
+
+            Pattern pattern = Pattern.compile(busca, Pattern.CASE_INSENSITIVE);
+            Matcher matcher = pattern.matcher(tarefa.getTitulo());
+
+            if(matcher.find()) {
+
+                System.out.println("encontrdo");
+                System.out.println(tarefa);
+
+                encontrado = true;
+
+
+            }
+
+
+        }
+        if(encontrado == !true){
+            System.out.println("não encontrado");
+        }
+
+
     }
 
 
