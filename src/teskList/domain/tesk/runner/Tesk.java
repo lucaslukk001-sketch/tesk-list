@@ -2,21 +2,21 @@ package teskList.domain.tesk.runner;
 
 import java.time.LocalDateTime;
 
-public class tesk {
+public class Tesk {
     private String Titulo;
     private String tarefa;
     private LocalDateTime data;
     private priority prioriade;
     private int ID;
 
-    public tesk(String titulo, priority prioriade, LocalDateTime data, String tarefa, int ID) {
+    public Tesk(String titulo, priority prioriade, LocalDateTime data, String tarefa, int ID) {
         Titulo = titulo;
         this.prioriade = prioriade;
         this.data = data;
         this.tarefa = tarefa;
         this.ID = ID;
     }
-    public tesk(){}
+    public Tesk(){}
 
 
     public int getID() {

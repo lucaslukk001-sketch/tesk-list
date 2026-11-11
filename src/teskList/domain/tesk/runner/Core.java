@@ -4,18 +4,15 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
-import java.util.Locale;
 import java.util.Map;
 import java.util.Scanner;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 
-public class core {
+public class Core {
 
-    public Map<Integer, tesk> teskMap = new HashMap<>();
+    public Map<Integer, Tesk> teskMap = new HashMap<>();
     public int ID = 1;
 
 
@@ -34,11 +31,11 @@ public class core {
         }
         teskMap.get(1);
 
-        ID++;
 
-        tesk terefa = new tesk(tile, priority, date, tesk, ID);
+        Tesk terefa = new Tesk(tile, priority, date, tesk, ID);
         teskMap.put(ID, terefa);
         System.out.println("tarefa criada com sucesso!!!");
+        ID++;
 
 
     }
@@ -135,7 +132,7 @@ public class core {
     }
 
 
-    public static void gerenciar(){
+    public  void gerenciar(){
 
 
 
@@ -154,65 +151,63 @@ public class core {
 
         System.out.println("Qual a data da tarefa:");
         LocalDateTime data = lerDataHora();
-        core core = new core();
 
-        core.createTesk(titulo, tarefa, data, prioridade);
-        core.print();
-
+        createTesk(titulo, tarefa, data, prioridade);
 
     }
 
     public void print(){
 
-        for(tesk terefa : teskMap.values()){
+        DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+
+        for(Tesk terefa : teskMap.values()){
 
             System.out.println("Titulo :"+terefa.getTitulo());
             System.out.println("Tarefa :"+terefa.getTarefa());
             System.out.println("Prioridade :"+terefa.getPrioriade());
-            System.out.println("Data :"+terefa.getData());
+            System.out.println("Data :"+terefa.getData().format(formato));
         }
 
 
     }
-    public static void seetesk(){
-        core core = new core();
 
-        core.print();
-    }
 
-    public void searchTesk(){
+    public void searchTesk() {
         Scanner scanner = new Scanner(System.in);
-        System.out.println("----BUSCA----");
-        System.out.println();
-        System.out.println("digite a tarefa por titulo que vc quer buscar:");
+        System.out.println("\n---- BUSCA ----");
+        System.out.println("Digite a tarefa por título que você quer buscar:");
         String busca = scanner.nextLine();
         boolean encontrado = false;
+        if(busca.isEmpty()){
+            System.out.println( "você não digitou nada");
+        }
 
-        for(tesk tarefa : teskMap.values() ) {
 
-            Pattern pattern = Pattern.compile(busca, Pattern.CASE_INSENSITIVE);
+
+        for (Tesk tarefa : teskMap.values()) {
+            Pattern pattern = Pattern.compile(busca);
             Matcher matcher = pattern.matcher(tarefa.getTitulo());
 
-            if(matcher.find()) {
 
-                System.out.println("encontrdo");
-                System.out.println(tarefa);
 
+
+            if (matcher.find()) {
+                System.out.println("Encontrado!");
+                System.out.println("Título: " + tarefa.getTitulo() + " | Descrição: " + tarefa.getTarefa());
                 encontrado = true;
-
-
             }
-
-
-        }
-        if(encontrado == !true){
-            System.out.println("não encontrado");
         }
 
-
+        if (encontrado == false) {
+            System.out.println("Não encontrado.");
+        }
+        System.out.println("-------------------");
     }
-
-
 
 
 }
+
+
+
+
+
